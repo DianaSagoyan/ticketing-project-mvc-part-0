@@ -32,7 +32,7 @@
                                 <div class="panel-body">
 
                                     <!-- ------------------------FORM START----------------------------- -->
-                                    <form action="#" th:object="${user}">
+                                    <form th:action="@{/user/create}" method="post" th:object="${user}">
                                         <div class="row">
                                             <div class="col-sm-6 col-md-6">
                                                 <div class="form-group">
@@ -86,10 +86,10 @@
                                                 <div class="form-group">
                                                     <label>Gender</label><br>
                                                     <label class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" name="radio-inline" th:value="Male" th:field="*{gender}" class="custom-control-input"><span class="custom-control-label">Male</span>
+                                                        <input type="radio" name="radio-inline" th:value="MALE" th:field="*{gender}" class="custom-control-input"><span class="custom-control-label">Male</span>
                                                     </label>
                                                     <label class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" name="radio-inline" th:value="Female" th:field="*{gender}" class="custom-control-input"><span class="custom-control-label">Female</span>
+                                                        <input type="radio" name="radio-inline" th:value="FEMALE" th:field="*{gender}" class="custom-control-input"><span class="custom-control-label">Female</span>
                                                     </label>
 
                                                 </div>
@@ -142,32 +142,28 @@
                                     <div class="table-responsive">
                                         <table th:object="${user}" class="table table-striped">
                                             <thead>
-                                            <tr th:each="user : ${users}">
-                                                <th th:text="${user.firstName}" scope="col">Name</th>
-                                                <th th:text="${user.userName}" scope="col">Email(username)</th>
-                                                <th th:text="${user.gender}" scope="col">Gender</th>
-                                                <th th:text="${user.phone}" scope="col">Phone</th>
-                                                <th th:text="${user.role.getDescription()}" scope="col">Role</th>
-<!--                                                <th scope="col">Action</th>-->
-                                                <td class="actions">
-                                                    <a href="#"><button type="button" class="btn btn-warning btn-sm">Update</button></a>
-                                                    <a href="#" class="delete-row"><button type="button" class="btn btn-secondary btn-sm">Delete</button></a>
-                                                </td>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Email(username)</th>
+                                                <th scope="col">Gender</th>
+                                                <th scope="col">Phone</th>
+                                                <th scope="col">Role</th>
+                                                <th scope="col">Action</th>
                                             </tr>
                                             </thead>
 
                                             <tbody>
 
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-<!--                                                <td class="actions">-->
-<!--                                                    <a href="#"><button type="button" class="btn btn-warning btn-sm">Update</button></a>-->
-<!--                                                    <a href="#" class="delete-row"><button type="button" class="btn btn-secondary btn-sm">Delete</button></a>-->
-<!--                                                </td>-->
+                                            <tr th:each="user : ${users}">
+                                                <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+                                                <td th:text="${user.userName}"></td>
+                                                <td th:text="${user.gender.value}"></td>
+                                                <td th:text="${user.phone}"></td>
+                                                <td th:text="${user.role.description}"></td>
+                                                <td class="actions">
+                                                    <a href="#"><button type="button" class="btn btn-warning btn-sm">Update</button></a>
+                                                    <a href="#" class="delete-row"><button type="button" class="btn btn-secondary btn-sm">Delete</button></a>
+                                                </td>
                                             </tr>
 
                                             </tbody>
