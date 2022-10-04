@@ -123,14 +123,14 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                            <tr th:each="task : ${tasks}">
+                                                <td th:text="${task.project.projectName}"></td>
+                                                <td th:text="${task.taskSubject}"></td>
+                                                <td th:text="${task.assignedEmployee.firstName + ' ' + task.assignedEmployee.lastName}"></td>
+                                                <td th:text="${task.assignedDate}"></td>
+                                                <td th:text="${task.taskStatus.value}"></td>
                                                 <td class="actions">
-                                                    <a href="#" class="btn btn-warning rounded-0">Update</a>
+                                                    <a th:href="@{/task/update/{id}(id=${task.id})}" class="btn btn-warning rounded-0">Update</a>
                                                     <a th:href="@{/task/delete/{id}(id=${task.id})}" class="btn btn-danger rounded-0">Delete</a>
                                                 </td>
                                             </tr>
