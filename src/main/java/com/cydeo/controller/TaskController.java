@@ -91,4 +91,21 @@ public class TaskController {
 
         return "/task/archive";
     }
+
+    @GetMapping("/employee/edit/{id}")
+    public String employeeEditTask(@PathVariable Long id, Model model){
+
+        model.addAttribute("task", taskService.findById(id));
+        model.addAttribute("projects", projectService.findAll());
+        model.addAttribute("employees", userService.findEmployees());
+        model.addAttribute("statuses", Status.values());
+        model.addAttribute("tasks", taskService.findAllTasksByStatusIsNot(Status.COMPLETE));
+        return "/task/status-update";
+    }
+
+    @PostMapping("/employee/update/{id}")
+    public String employeeUpdateTask(@ModelAttribute TaskDTO task){
+        taskService.updateStatus(task);
+        return "redirect:/task/employee/pending-tasks";
+    }
 }
